@@ -42,7 +42,8 @@ namespace AlfredoRevillaWebshop.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            return View(await _service.GetAsync());
+            var result = await _service.GetAsync();
+            return View(new PagedResult<ProductModel>(result.Select(o => new ProductModel(o)).ToArray(), result.TotalElements));
         }
     }
 }
