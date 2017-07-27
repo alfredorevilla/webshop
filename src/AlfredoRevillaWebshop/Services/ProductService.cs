@@ -17,7 +17,7 @@ namespace AlfredoRevillaWebshop.Services
 
         public async Task<PagedResult<ProductServiceModel>> GetAsync()
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(new PagedResult<ProductServiceModel>(Enumerable.Empty<ProductServiceModel>().ToArray(), 0));
         }
     }
 }
