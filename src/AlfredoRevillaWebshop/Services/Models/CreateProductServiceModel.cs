@@ -13,12 +13,8 @@ namespace AlfredoRevillaWebshop.Services.Models
             this.MPN = model.MPN;
         }
 
-        [Required]
-        [MaxLength(13)]
         public string MPN { get; }
 
-        [Required]
-        [MaxLength(255)]
         public string Title { get; }
     }
 }

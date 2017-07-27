@@ -30,9 +30,6 @@ namespace AlfredoRevillaWebshop
         {
             // Add framework services.
             services.AddMvc();
-
-            services.AddDbContext<AlfredoRevillaWebshopDbContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("AlfredoRevillaWebshopDbContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
