@@ -29,20 +29,20 @@ namespace AlfredoRevillaWebshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,MPN")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Title,MPN")] CreateProductModel model)
         {
             if (ModelState.IsValid)
             {
-                await _service.CreateAsync(product.MapToServiceModel());
-                return RedirectToAction("Index");
+                await _service.CreateAsync(new CreateProductServiceModel(model));
+                return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            return View(model);
         }
 
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            return View(((IPagedResult<Product>)await _service.GetAsync().MapElementsToServiceModel()));
+            return View(await _service.GetAsync());
         }
     }
 }

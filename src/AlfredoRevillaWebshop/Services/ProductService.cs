@@ -8,12 +8,12 @@ namespace AlfredoRevillaWebshop.Services
 {
     public class ProductService
     {
-        internal object GetAsync()
+        public async Task< GetProductsServiceResult> GetAsync()
         {
             throw new NotImplementedException();
         }
 
-        internal Task CreateAsync(ProductServiceModel productServiceModel)
+        public async Task<int> CreateAsync(CreateProductServiceModel productServiceModel)
         {
             throw new NotImplementedException();
         }
