@@ -40,6 +40,10 @@
         </div>
     </nav>
     <div class="container body-content">
+        <br />
+        @{await Html.RenderPartialAsync("_SelectRepository.cshtml", new[] { "In Memory", "SQL Server" }); }
+    </div>
+    <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>

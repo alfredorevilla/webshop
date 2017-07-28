@@ -37,6 +37,7 @@ namespace AlfredoRevillaWebshop.Repositories.Implementations
 
         public async Task<PagedResult<ProductRepositoryModel>> GetProductsAsync(GetProductsRepositoryModel model)
         {
+            //  return copies of cached entities so they cannot be modified accidentally by consumers
             return await Task.FromResult(new PagedResult<ProductRepositoryModel>(_data.Skip(model.StartIndex).Take(model.MaxRecords).Select(o => new ProductRepositoryModel { Id = o.Id, MPN = o.MPN, Price = o.Price, Title = o.Title }), _data.Count));
         }
     }
