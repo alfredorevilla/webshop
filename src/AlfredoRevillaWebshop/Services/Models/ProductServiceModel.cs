@@ -2,14 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AlfredoRevillaWebshop.Repositories.Models;
 
 namespace AlfredoRevillaWebshop.Services.Models
 {
     public class ProductServiceModel
     {
-        public int Id { get; internal set; }
-        public string Title { get; internal set; }
-        public decimal Price { get; internal set; }
-        public string MPN { get; internal set; }
+        public ProductServiceModel(ProductRepositoryModel model)
+        {
+            this.Id = model.Id;
+            this.MPN = model.MPN;
+            this.Price = model.Price;
+            this.Title = model.Title;
+        }
+
+        public int Id { get; }
+        public string Title { get; set; }
+        public decimal Price { get; set; }
+        public string MPN { get; set; }
     }
 }

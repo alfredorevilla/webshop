@@ -1,15 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AlfredoRevillaWebshop.Models;
 using AlfredoRevillaWebshop.Repositories.Models;
 
 namespace AlfredoRevillaWebshop.Repositories
 {
     public interface IProductsRepository
     {
-        Task<int> CreateProduct(CreateProductRepositoryModel model);
+        string Name { get; }
 
-        Task<IQueryable<ProductRepositoryModel>> QueryProducts();
+        Task<int> CreateAsync(CreateProductRepositoryModel model);
+
+        Task<PagedResult<ProductRepositoryModel>> GetProductsAsync(GetProductsRepositoryModel model);
     }
 }

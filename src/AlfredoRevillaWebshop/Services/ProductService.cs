@@ -2,22 +2,38 @@
 using System;
 using System.Threading.Tasks;
 using AlfredoRevillaWebshop.Models;
+using AlfredoRevillaWebshop.Repositories;
+using AlfredoRevillaWebshop.Repositories.Models;
 using AlfredoRevillaWebshop.Services.Models;
-
-using System;
 
 namespace AlfredoRevillaWebshop.Services
 {
     public class ProductService
     {
-        public async Task<int> CreateAsync(CreateProductServiceModel productServiceModel)
+        private IProductsRepository _repository;
+
+        public ProductService(IProductsRepository repository)
         {
-            throw new NotImplementedException();
+            this._repository = repository;
         }
 
-        public async Task<PagedResult<ProductServiceModel>> GetAsync()
+        public async Task<int> CreateAsync(CreateProductServiceModel model)
         {
-            return await Task.FromResult(new PagedResult<ProductServiceModel>(Enumerable.Empty<ProductServiceModel>().ToArray(), 0));
+            return await _repository.CreateAsync(new CreateProductRepositoryModel
+            {
+                MPN = model.MPN,
+                Title = model.Title
+            });
+        }
+
+        public async Task<PagedResult<ProductServiceModel>> GetAsync(GetProductsServiceModel model)
+        {
+            var result = await _repository.GetProductsAsync(new GetProductsRepositoryModel
+            {
+                StartIndex = model.StartIndex,
+                MaxRecords = model.MaxRecords
+            });
+            return new PagedResult<ProductServiceModel>(result.Select(o => new ProductServiceModel(o)), result.TotalElements);
         }
     }
 }

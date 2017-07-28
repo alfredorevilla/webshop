@@ -9,9 +9,9 @@ namespace AlfredoRevillaWebshop.Models
     {
         private TElement[] _collection;
 
-        internal PagedResult(TElement[] collection, int totalElements)
+        internal PagedResult(IEnumerable<TElement> collection, int totalElements)
         {
-            this._collection = collection;
+            this._collection = collection.ToArray();
             this.TotalElements = totalElements;
         }
 

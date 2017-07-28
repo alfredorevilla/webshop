@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using AlfredoRevillaWebshop.Repositories.Implementations;
+using AlfredoRevillaWebshop.Repositories;
 
 namespace AlfredoRevillaWebshop
 {
@@ -53,6 +55,7 @@ namespace AlfredoRevillaWebshop
             services.AddMvc();
 
             services.AddTransient<ProductService>();
+            services.AddTransient<IProductsRepository, InMemoryProductsRepository>();
         }
     }
 }

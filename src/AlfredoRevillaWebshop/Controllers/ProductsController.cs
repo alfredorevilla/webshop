@@ -29,7 +29,7 @@ namespace AlfredoRevillaWebshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,MPN")] CreateProductModel model)
+        public async Task<IActionResult> Create([Bind("Title,MPN")] CreateProductModel model)
         {
             if (ModelState.IsValid)
             {
@@ -40,10 +40,14 @@ namespace AlfredoRevillaWebshop.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 0, int pageSize = 10)
         {
-            var result = await _service.GetAsync();
-            return View(new PagedResult<ProductModel>(result.Select(o => new ProductModel(o)).ToArray(), result.TotalElements));
+            var result = await _service.GetAsync(new GetProductsServiceModel
+            {
+                StartIndex = page > 0 ? page * pageSize : 0,
+                MaxRecords = pageSize
+            });
+            return View(new PagedResult<ProductModel>(result.Select(o => new ProductModel(o)), result.TotalElements));
         }
     }
 }
