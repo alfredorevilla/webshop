@@ -13,7 +13,7 @@ namespace AlfredoRevillaWebshop.Tests
         private InMemoryProductsRepository _repository;
 
         [Fact]
-        public async Task Test1()
+        public async Task First_id_should_be_set_to_1()
         {
             _repository = new InMemoryProductsRepository();
             (await _repository.CreateAsync(new CreateProductRepositoryModel { })).Should().Be(1);

@@ -1,21 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
+using System;
 using AlfredoRevillaWebshop.Models;
 using AlfredoRevillaWebshop.Repositories.Models;
+using System.Collections.Concurrent;
+
+using System.Linq;
+
+using System.Threading.Tasks;
 
 namespace AlfredoRevillaWebshop.Repositories.Implementations
 {
+    //  todo: logging
     public class InMemoryProductsRepository : IProductsRepository
     {
-        private List<ProductRepositoryModel> _data;
+        private static readonly ConcurrentQueue<ProductRepositoryModel> _data;
 
-        //  todo: logging
-        public InMemoryProductsRepository()
+        static InMemoryProductsRepository()
         {
-            _data = new List<ProductRepositoryModel>();
+            _data = new ConcurrentQueue<ProductRepositoryModel>();
         }
 
         public string Name => "In Memory";
@@ -29,13 +31,13 @@ namespace AlfredoRevillaWebshop.Repositories.Implementations
                 MPN = model.MPN,
                 Title = model.Title
             };
-            _data.Add(toAdd);
+            _data.Enqueue(toAdd);
             return await Task.FromResult(id);
         }
 
         public async Task<PagedResult<ProductRepositoryModel>> GetProductsAsync(GetProductsRepositoryModel model)
         {
-            return await Task.FromResult(new PagedResult<ProductRepositoryModel>(_data.Skip(model.StartIndex).Take(model.MaxRecords), _data.Count));
+            return await Task.FromResult(new PagedResult<ProductRepositoryModel>(_data.Skip(model.StartIndex).Take(model.MaxRecords).Select(o => new ProductRepositoryModel { Id = o.Id, MPN = o.MPN, Price = o.Price, Title = o.Title }), _data.Count));
         }
     }
 }
