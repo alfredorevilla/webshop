@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
 
@@ -12,7 +13,7 @@ namespace AlfredoRevillaWebshop.Repositories.Implementations
         public DefaultProductsRepositoryFactory(IConfiguration configuration)
         {
             _lambdas.Add("In Memory", () => new InMemoryProductsRepository());
-            _lambdas.Add("SQL Server", () => new SqlServerDbContextProductsRepository(configuration.GetConnectionString("SqlServerDbContextProductsRepository")));
+            _lambdas.Add("SQL Server", () => new SqlServerDbContextProductsRepository(configuration.GetConnectionString("SqlServerDbContextProductsRepository").Replace("%CONTENTROOTPATH%", Directory.GetCurrentDirectory())));
         }
 
         public IProductsRepository Create(string repositoryName)
