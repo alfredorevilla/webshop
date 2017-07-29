@@ -41,14 +41,14 @@ namespace AlfredoRevillaWebshop.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index(int page = 0, int pageSize = 10)
+        public async Task<IActionResult> Index(int page = 0, int pageSize = 3)
         {
             var result = await _service.GetAsync(new GetProductsServiceModel
             {
                 StartIndex = page > 0 ? page * pageSize : 0,
                 MaxRecords = pageSize
             });
-            return View(new PagedResult<ProductModel>(result.Select(o => new ProductModel(o)), result.TotalElements));
+            return View(new PaginatedList<ProductModel>(result.Select(o => new ProductModel(o)), result.TotalElements, page, pageSize));
         }
     }
 }
