@@ -9,6 +9,8 @@ namespace AlfredoRevillaWebshop.Models
         [Required]
         public string MPN { get; set; }
 
+        public decimal Price { get; set; }
+
         [Required]
         public string Title { get; set; }
     }

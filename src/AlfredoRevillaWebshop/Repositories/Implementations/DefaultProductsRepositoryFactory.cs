@@ -7,14 +7,7 @@ namespace AlfredoRevillaWebshop.Repositories.Implementations
 {
     public class DefaultProductsRepositoryFactory : IProductsRepositoryFactory
     {
-        //private static DefaultProductsRepositoryFactory _instance;
-
         private Dictionary<string, Func<IProductsRepository>> _lambdas = new Dictionary<string, Func<IProductsRepository>>();
-
-        //static DefaultProductsRepositoryFactory()
-        //{
-        //    _instance = new DefaultProductsRepositoryFactory();
-        //}
 
         public DefaultProductsRepositoryFactory(IConfiguration configuration)
         {
@@ -22,13 +15,6 @@ namespace AlfredoRevillaWebshop.Repositories.Implementations
             _lambdas.Add("SQL Server", () => new SqlServerDbContextProductsRepository(configuration.GetConnectionString("SqlServerDbContextProductsRepository")));
         }
 
-        //public static IProductsRepositoryFactory Instance
-        //{
-        //    get
-        //    {
-        //        return _instance;
-        //    }
-        //}
         public IProductsRepository Create(string repositoryName)
         {
             if (string.IsNullOrWhiteSpace(repositoryName))

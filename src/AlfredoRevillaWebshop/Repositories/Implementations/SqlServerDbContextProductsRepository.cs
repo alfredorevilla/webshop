@@ -29,10 +29,10 @@ namespace AlfredoRevillaWebshop.Repositories.Implementations
             return added.Entity.Id;
         }
 
-        public Task<PagedResult<ProductRepositoryModel>> GetProductsAsync(GetProductsRepositoryModel model)
+        public async Task<PagedResult<ProductRepositoryModel>> GetProductsAsync(GetProductsRepositoryModel model)
         {
             var totalRecords = this._dbContext.Products.Count();
-            return Task.FromResult(new PagedResult<ProductRepositoryModel>(this._dbContext.Products.Skip(model.StartIndex).Take(model.MaxRecords), totalRecords));
+            return await Task.FromResult(new PagedResult<ProductRepositoryModel>(this._dbContext.Products.Skip(model.StartIndex).Take(model.MaxRecords), totalRecords));
         }
     }
 }
