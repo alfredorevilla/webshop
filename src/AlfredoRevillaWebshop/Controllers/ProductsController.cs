@@ -16,6 +16,7 @@ namespace AlfredoRevillaWebshop.Controllers
         public ProductsController(ProductService service)
         {
             _service = service;
+            ViewData["AvailableRepositoriesNames"] = service.GetAvailableRepositoryNames();
         }
 
         // GET: Products/Create

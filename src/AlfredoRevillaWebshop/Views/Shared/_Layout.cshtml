@@ -1,4 +1,7 @@
 ﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+@{
+    ViewData["AvailableRepositoriesNames"] = Context.GetAvailableRepositoriesNames();
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +44,7 @@
     </nav>
     <div class="container body-content">
         <br />
-        @{await Html.RenderPartialAsync("_SelectRepository.cshtml", new[] { "InMemory", "SqlServer" }); }
+        @{await Html.RenderPartialAsync("_SelectRepository.cshtml", ViewData["AvailableRepositoriesNames"]);  }
     </div>
     <div class="container body-content">
         @RenderBody()

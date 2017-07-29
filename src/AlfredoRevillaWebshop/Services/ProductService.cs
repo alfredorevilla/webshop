@@ -10,10 +10,12 @@ namespace AlfredoRevillaWebshop.Services
 {
     public class ProductService
     {
+        private IProductsRepositoryFactory _factory;
         private IProductsRepository _repository;
 
-        public ProductService(IProductsRepository repository)
+        public ProductService(IProductsRepositoryFactory factory, IProductsRepository repository)
         {
+            this._factory = factory;
             this._repository = repository;
         }
 

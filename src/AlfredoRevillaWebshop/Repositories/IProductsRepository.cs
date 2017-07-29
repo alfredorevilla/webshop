@@ -8,8 +8,6 @@ namespace AlfredoRevillaWebshop.Repositories
 {
     public interface IProductsRepository
     {
-        string Name { get; }
-
         Task<int> CreateAsync(CreateProductRepositoryModel model);
 
         Task<PagedResult<ProductRepositoryModel>> GetProductsAsync(GetProductsRepositoryModel model);

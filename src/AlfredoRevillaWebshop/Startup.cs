@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using AlfredoRevillaWebshop.Repositories.Implementations;
 using AlfredoRevillaWebshop.Repositories;
+using AlfredoRevillaWebshop.Repositories.Extensions;
+using Microsoft.AspNetCore.Http;
 
 namespace AlfredoRevillaWebshop
 {
@@ -54,8 +56,10 @@ namespace AlfredoRevillaWebshop
         {
             services.AddMvc();
 
-            services.AddTransient<ProductService>();
-            services.AddTransient<IProductsRepository, InMemoryProductsRepository>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IProductsRepositoryFactory>((o) => DefaultProductsRepositoryFactory.Instance);
+            services.AddScoped<ProductService>();
+            services.AddScoped<IProductsRepository>((o) => o.GetRequiredService<IProductsRepositoryFactory>().Create(o.GetRequiredService<IHttpContextAccessor>().HttpContext.GetRequestedRepository()));
         }
     }
 }

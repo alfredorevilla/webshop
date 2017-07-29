@@ -1,11 +1,11 @@
-﻿@model string[]
+﻿@model IEnumerable<string>
 
 <span>
     <b>Choose a repository:</b>
     @{
         @foreach (var item in this.Model)
         {
-            <input onclick="$('#link_@item')[0].click()" type="radio" name="repository" value="@item" id="@item" checked="@this.Context.GetRequestedRepository().Equals(@item)" />
+            <input onclick="$('link_@item').click()" type="radio" name="repository" value="@item" id="@item" checked="@this.Context.GetRequestedRepository().Equals(@item)" />
             <label for="@item"><a id="link_@item" asp-route-repository="@item">@item</a></label>
         }
     }
