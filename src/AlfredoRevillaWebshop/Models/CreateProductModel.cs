@@ -6,8 +6,10 @@ namespace AlfredoRevillaWebshop.Models
 {
     public class CreateProductModel
     {
+        [Required]
         public string MPN { get; set; }
 
+        [Required]
         public string Title { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-@model AlfredoRevillaWebshop.Models.ProductModel
+@model AlfredoRevillaWebshop.Models.CreateProductModel
 
 @{
     ViewData["Title"] = "Create";
@@ -28,7 +28,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" asp-route-repository="@Context.GetRequestedRepository()" />
             </div>
         </div>
     </div>

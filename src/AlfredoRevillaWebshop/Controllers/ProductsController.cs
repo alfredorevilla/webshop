@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using AlfredoRevillaWebshop.Services;
 using AlfredoRevillaWebshop.Services.Models;
+using AlfredoRevillaWebshop.Repositories.Extensions;
 
 namespace AlfredoRevillaWebshop.Controllers
 {
@@ -34,7 +35,7 @@ namespace AlfredoRevillaWebshop.Controllers
             if (ModelState.IsValid)
             {
                 await _service.CreateAsync(new CreateProductServiceModel(model));
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { repository = this.HttpContext.GetRequestedRepository() });
             }
             return View(model);
         }
