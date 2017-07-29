@@ -10,6 +10,8 @@ using AlfredoRevillaWebshop.Repositories.Implementations;
 using AlfredoRevillaWebshop.Repositories;
 using AlfredoRevillaWebshop.Repositories.Extensions;
 using Microsoft.AspNetCore.Http;
+using AlfredoRevillaWebshop.Repositories.Implementations.SqlServer;
+using Microsoft.EntityFrameworkCore;
 
 namespace AlfredoRevillaWebshop
 {
@@ -57,7 +59,8 @@ namespace AlfredoRevillaWebshop
             services.AddMvc();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddSingleton<IProductsRepositoryFactory>((o) => DefaultProductsRepositoryFactory.Instance);
+            services.AddSingleton<IProductsRepositoryFactory>((o) => new DefaultProductsRepositoryFactory(Configuration));
+
             services.AddScoped<ProductService>();
             services.AddScoped<IProductsRepository>((o) => o.GetRequiredService<IProductsRepositoryFactory>().Create(o.GetRequiredService<IHttpContextAccessor>().HttpContext.GetRequestedRepository()));
         }
