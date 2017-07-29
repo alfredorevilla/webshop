@@ -2,7 +2,7 @@
 {
     public class GetProductsServiceModel
     {
-        public int StartIndex { get; set; }
         public int MaxRecords { get; set; }
+        public int StartIndex { get; set; }
     }
 }

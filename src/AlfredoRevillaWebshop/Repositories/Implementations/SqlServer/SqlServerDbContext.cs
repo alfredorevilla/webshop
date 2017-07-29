@@ -16,14 +16,15 @@ namespace AlfredoRevillaWebshop.Repositories.Implementations.SqlServer
         {
             this._connectionString = connectionString;
         }
+
+        public DbSet<ProductRepositoryModel> Products { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(this._connectionString);
 
             base.OnConfiguring(optionsBuilder);
         }
-
-        public DbSet<ProductRepositoryModel> Products { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

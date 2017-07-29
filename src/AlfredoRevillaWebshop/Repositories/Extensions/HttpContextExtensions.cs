@@ -9,6 +9,11 @@ namespace AlfredoRevillaWebshop.Repositories.Extensions
 {
     public static class HttpContextExtensions
     {
+        public static IEnumerable<string> GetAvailableRepositoriesNames(this HttpContext context)
+        {
+            return context.RequestServices.GetRequiredService<IProductsRepositoryFactory>().GetAvailableRepositoriesNames();
+        }
+
         public static string GetRequestedRepository(this HttpContext context)
         {
             var repositoryName = context.Request.Query["repository"].ToString();
@@ -17,11 +22,6 @@ namespace AlfredoRevillaWebshop.Repositories.Extensions
                 return context.RequestServices.GetRequiredService<IProductsRepositoryFactory>().GetAvailableRepositoriesNames().First();
             }
             return repositoryName;
-        }
-
-        public static IEnumerable<string> GetAvailableRepositoriesNames(this HttpContext context)
-        {
-            return context.RequestServices.GetRequiredService<IProductsRepositoryFactory>().GetAvailableRepositoriesNames();
         }
     }
 }

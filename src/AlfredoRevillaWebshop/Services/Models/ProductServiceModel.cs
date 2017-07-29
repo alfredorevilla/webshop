@@ -17,8 +17,8 @@ namespace AlfredoRevillaWebshop.Services.Models
         }
 
         public int Id { get; }
-        public string Title { get; set; }
-        public decimal Price { get; set; }
         public string MPN { get; set; }
+        public decimal Price { get; set; }
+        public string Title { get; set; }
     }
 }
