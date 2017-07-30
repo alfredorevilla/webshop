@@ -24,7 +24,8 @@ namespace AlfredoRevillaWebshop.Services
             return await _repository.CreateAsync(new CreateProductRepositoryModel
             {
                 MPN = model.MPN,
-                Title = model.Title
+                Title = model.Title,
+                Price = model.Price
             });
         }
 

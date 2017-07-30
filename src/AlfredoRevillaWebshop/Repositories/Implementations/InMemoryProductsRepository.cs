@@ -22,7 +22,8 @@ namespace AlfredoRevillaWebshop.Repositories.Implementations
             {
                 Id = id,
                 MPN = model.MPN,
-                Title = model.Title
+                Title = model.Title,
+                Price = model.Price
             };
             _data.Enqueue(toAdd);
             return await Task.FromResult(id);

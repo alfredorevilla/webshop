@@ -11,10 +11,12 @@ namespace AlfredoRevillaWebshop.Services.Models
         {
             this.Title = model.Title;
             this.MPN = model.MPN;
+            this.Price = model.Price;
         }
 
         public string MPN { get; }
 
+        public decimal Price { get; }
         public string Title { get; }
     }
 }
